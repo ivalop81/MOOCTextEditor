@@ -14,7 +14,7 @@ public class DictionaryBenchmarking {
 
 	    // Run each test more than once to get bigger numbers and less noise.
 	    // You can try playing around with this number.
-	    int trials = 500;
+	    int trials = 10000;
 
 	    // The text to test on
 	    String dictFile = "data/dict.txt";
@@ -25,13 +25,17 @@ public class DictionaryBenchmarking {
 
 		// The number of steps to run.  
 		// You can play around with this.
-		int numSteps = 20;
+		int numSteps = 50;
+		
+		int stepsCounter = 1;
 		
 		// The number of words to start with. 
 		// You can play around with this.
-		int start = 50000;
+		int start = 0;
 		
 		String notInDictionary = "notaword";
+		
+		System.out.println("stepsCounter" + "\t" + "numToCheck" + "\t" + "timeLL" + "\t\t" + "timeBST");
 		
 		// TODO: Play around with the numbers above and graph the output to see trends in the data
 		for (int numToCheck = start; numToCheck < numSteps*increment + start; 
@@ -58,8 +62,8 @@ public class DictionaryBenchmarking {
 			endTime = System.nanoTime();
 			long timeBST = (endTime - startTime);
 			
-			System.out.println(numToCheck + "\t" + timeLL + "\t" + timeBST);
-			
+			System.out.println(stepsCounter + "\t\t" + numToCheck + "\t\t" + timeLL + "\t" + timeBST);
+			stepsCounter++;
 		}
 	
 	}
