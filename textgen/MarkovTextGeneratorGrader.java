@@ -34,11 +34,16 @@ public class MarkovTextGeneratorGrader {
 
             String input = "I love cats. I hate dogs. I I I I I I I I I I I I I I I I love cats. I I I I I I I I I I I I I I I I hate dogs. I I I I I I I I I like books. I love love. I am a text generator. I love cats. I love cats. I love cats. I love love love socks.";
             gen.retrain(input);
+            feedback += gen + "\n";
             String res = gen.generateText(LENGTH);
 
             feedback += "\nGenerator produced: " + res + "\n";
 
             String[] words = res.split("[\\s]+");
+            for (String w : words) {
+            	feedback += w + " ";
+            }
+            
             feedback += "\n** Test #3: Checking requested generator word count...";
             feedback += "Your generator produced " + words.length + " words. ";
 
@@ -65,7 +70,7 @@ public class MarkovTextGeneratorGrader {
             feedback += "Done. ";
 
             feedback += "\n** Test #7: Requesting zero words...";
-            feedback += "Generator generated: " + gen.generateText(0) + ". ";
+            feedback += "Generator generated: " + gen.generateText(2) + ". ";
 
             gen.train("");
             res = gen.generateText(LENGTH);
@@ -81,6 +86,7 @@ public class MarkovTextGeneratorGrader {
             feedback += "The word 'I' appears " + i + " times. ";
 
             gen.retrain("");
+            
             feedback += "\n** Test #9: Testing retrain()...";
             String s = gen.generateText(20);
             feedback += "Text generated: " + s + ". ";

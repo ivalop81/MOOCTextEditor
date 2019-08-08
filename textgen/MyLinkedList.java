@@ -53,7 +53,7 @@ public class MyLinkedList<E> extends AbstractList<E> {
 		// TODO: Implement this method.
 		int i = 0;
 		
-		LLNode <E> curr;
+		LLNode <E> curr = new LLNode<E>(null);
 		curr = head;
 		
 		//System.out.println(size);
@@ -158,6 +158,9 @@ public class MyLinkedList<E> extends AbstractList<E> {
 		if (index < 0 || index >= size) {
 			throw new IndexOutOfBoundsException();
 		}
+		
+		if (element == null)
+			throw new NullPointerException("MyLinkedList object cannot store null pointers.");
 				
 		LLNode <E> curr;
 		curr = head;
