@@ -134,6 +134,20 @@ public class BinaryTree <E>
 		else
 			return contains(value, node.getLeftChild());
 	}
+	insert(item, node):
+	
+	// Iterative algorithm for insertions in a BST
+	if (node.valnode.val== item)== item)
+		return false
+	else if (node.valnode.val< item)< item)
+		if (node.rightnode.right== null)== null)
+			add as right child, return true
+		insert(item, node.rightnode.right)
+	else // node.valnode.val> item> item
+		if (node.leftnode.left== null)== null)
+			add as as left left child, return truechild, return true
+		insert(item, , node.leftnode.left)
+	
 }
 
 public class TreeNode<E> 
