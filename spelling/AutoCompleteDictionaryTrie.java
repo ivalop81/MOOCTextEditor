@@ -1,6 +1,7 @@
 package spelling;
 
 import java.util.List;
+
 import java.util.Set;
 import java.util.Collection;
 import java.util.HashMap;
@@ -8,7 +9,7 @@ import java.util.LinkedList;
 
 /** 
  * An trie data structure that implements the Dictionary and the AutoComplete ADT
- * @author You
+ * @author Iván María López
  *
  */
 public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
@@ -40,6 +41,16 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 	public boolean addWord(String word)
 	{
 	    //TODO: Implement this method.
+				
+		for (int i = 0; i < word.length(); i++)
+		{
+		    char c = word.toLowerCase().charAt(i);
+		    
+		    //Process char
+		}
+		
+		
+		
 	    return false;
 	}
 	
@@ -86,6 +97,7 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
      */@Override
      public List<String> predictCompletions(String prefix, int numCompletions) 
      {
+    	 ArrayList<String> suggestedWords = new ArrayList(); 
     	 // TODO: Implement this method
     	 // This method should implement the following algorithm:
     	 // 1. Find the stem in the trie.  If the stem does not appear in the trie, return an
