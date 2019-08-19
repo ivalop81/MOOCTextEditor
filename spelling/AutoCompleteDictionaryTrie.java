@@ -21,6 +21,7 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
     public AutoCompleteDictionaryTrie()
 	{
 		root = new TrieNode();
+		size = 0;
 	}
 	
 	
@@ -40,17 +41,23 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 	 */
 	public boolean addWord(String word)
 	{
-	    //TODO: Implement this method.
-				
+	    //TODO: Implement this method.		
+		char c;
+		TrieNode curr = root;
 		for (int i = 0; i < word.length(); i++)
 		{
-		    char c = word.toLowerCase().charAt(i);
-		    
+		    c = word.toLowerCase().charAt(i);
+		    curr.insert(c);		    
+		    curr.setEndsWord(false);		    	
 		    //Process char
 		}
-		
-		
-		
+		if (!curr.getText().equalsIgnoreCase(word.toLowerCase()))
+		{
+			curr.setEndsWord(true);
+			size++;
+			return true;
+		}
+				
 	    return false;
 	}
 	
@@ -61,7 +68,7 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 	public int size()
 	{
 	    //TODO: Implement this method
-	    return 0;
+	    return size;
 	}
 	
 	
@@ -97,7 +104,7 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
      */@Override
      public List<String> predictCompletions(String prefix, int numCompletions) 
      {
-    	 ArrayList<String> suggestedWords = new ArrayList(); 
+    	 //ArrayList<String> suggestedWords = new ArrayList(); 
     	 // TODO: Implement this method
     	 // This method should implement the following algorithm:
     	 // 1. Find the stem in the trie.  If the stem does not appear in the trie, return an

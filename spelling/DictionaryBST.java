@@ -42,6 +42,8 @@ public class DictionaryBST implements Dictionary
         return dict.contains(s.toLowerCase());
     }
 
+    
+    
 }
 /*
 public class BinaryTree <E> 
@@ -147,6 +149,41 @@ public class BinaryTree <E>
 		if (node.leftnode.left== null)== null)
 			add as as left left child, return truechild, return true
 		insert(item, , node.leftnode.left)
+	
+	// TODO public class BST <E extends Comparable <? super E>>
+	public boolean contain(E toFind ) 
+	{
+		TreeNode<E> curr = root;
+		int comp;
+		while (curr != null) 
+		{
+			comp = toFind.compareTo(curr.getData());
+			if (comp < 0)
+				curr = curr.getLeft();
+			else if (comp > 0)
+				curr = curr.getRigth();
+			else
+				return true,
+		}
+		return false;
+	}
+		
+	public boolean insert (E toInsert) 
+	{
+		TreeNode<E> curr = root;
+		int comp = toInsert.compareTo(curr.getData());
+		while (comp < 0 && curr.getLeft() != null ||
+		       comp > 0 && curr.getRight() != null)
+		{
+			if (comp < 0) curr.getLeft();
+			else curr.getRigth();
+			comp = toInsert.compareTo(curr.getData());
+		}
+		if (comp < 0) curr.setLeftChild(toInsert, curr);
+		else if (comp > 0) curr.setRigthChild(toInsert, curr);
+		else return false;
+		return true;
+	}
 	
 }
 
