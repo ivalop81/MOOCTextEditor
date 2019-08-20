@@ -47,18 +47,23 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 		for (int i = 0; i < word.length(); i++)
 		{
 		    c = word.toLowerCase().charAt(i);
-		    curr.insert(c);		    
-		    curr.setEndsWord(false);		    	
+		    		
+		    if (curr.getChild(c) == null) 
+		    {
+		    	curr.insert(c);
+		    	curr = curr.getChild(c);
+		    	if (i == word.length()-1) 
+		    	{
+		    		curr.setEndsWord(true);
+		    		size++;
+					return true;
+		    	}
+		    	curr.setEndsWord(false);
+		    }
+		    		    	
 		    //Process char
 		}
-		if (!curr.getText().contentEquals(word.toLowerCase()))
-		{
-			curr.setEndsWord(true);
-			size++;
-			printTree();
-			return true;			
-		}
-				
+		printTree();
 	    return false;
 	}
 	
@@ -79,18 +84,18 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 	public boolean isWord(String s) 
 	{
 	    // TODO: Implement this method
-		TrieNode curr = root;
-		Character c;
-		for (int i = 0; i < s.length(); i++)
-		{
-			c = s.toLowerCase().charAt(i);
-			if(curr.getText().charAt(i) == c)
-				curr.getChild(c);
-			else
-				return false;
-		}
-		if (curr.endsWord())
-			return true;
+//		TrieNode curr = root;
+//		Character c;
+//		for (int i = 0; i < s.length(); i++)
+//		{
+//			c = s.toLowerCase().charAt(i);
+//			if(curr.getText().charAt(i) == c)
+//				curr.getChild(c);
+//			else
+//				return false;
+//		}
+//		if (curr.endsWord())
+//			return true;
 		
 		return false;
 	}
