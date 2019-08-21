@@ -50,8 +50,7 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 		    		
 		    if (curr.getChild(c) == null) 
 		    {
-		    	curr.insert(c);
-		    	curr = curr.getChild(c);
+		    	curr.insert(c);		    	
 		    	if (i == word.length()-1) 
 		    	{
 		    		curr.setEndsWord(true);
@@ -60,10 +59,10 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 		    	}
 		    	curr.setEndsWord(false);
 		    }
-		    		    	
+		    curr = curr.getChild(c);		    		    	
 		    //Process char
 		}
-		printTree();
+		//printTree();
 	    return false;
 	}
 	
@@ -84,19 +83,17 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 	public boolean isWord(String s) 
 	{
 	    // TODO: Implement this method
-//		TrieNode curr = root;
-//		Character c;
-//		for (int i = 0; i < s.length(); i++)
-//		{
-//			c = s.toLowerCase().charAt(i);
-//			if(curr.getText().charAt(i) == c)
-//				curr.getChild(c);
+		TrieNode curr = root;
+		Character c;
+		for (int i = 0; i < s.length(); i++)
+		{
+			c = s.toLowerCase().charAt(i);
+			//if(c.equals(curr.getText().charAt(i)))
+				curr = curr.getChild(c);
 //			else
 //				return false;
-//		}
-//		if (curr.endsWord())
-//			return true;
-		
+		}
+		curr.setEndsWord(true);		
 		return false;
 	}
 
