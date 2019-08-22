@@ -39,33 +39,51 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 	 * @return true if the word was successfully added or false if it already exists
 	 * in the dictionary.
 	 */
-	public boolean addWord(String word)
-	{
-	    //TODO: Implement this method.		
-		char c;
-		TrieNode curr = root;
-		for (int i = 0; i < word.length(); i++)
-		{
-		    c = word.toLowerCase().charAt(i);
-		    		
-		    if (curr.getChild(c) == null) 
-		    {
-		    	curr.insert(c);		    	
-		    	if (i == word.length()-1) 
-		    	{
-		    		curr.setEndsWord(true);
-		    		size++;
-					return true;
-		    	}
-		    	curr.setEndsWord(false);
-		    }
-		    curr = curr.getChild(c);		    		    	
-		    //Process char
-		}
-		//printTree();
-	    return false;
-	}
-	
+//	public boolean addWord(String word)
+//	{
+//	    //TODO: Implement this method.		
+//		char c;
+//		TrieNode curr = root;
+//		for (int i = 0; i < word.length(); i++)
+//		{
+//		    c = word.toLowerCase().charAt(i);
+//		    		
+//		    if (curr.getChild(c) == null) 
+//		    {
+//		    	curr.insert(c);		    	
+//		    	if (i == word.length()-1) 
+//		    	{
+//		    		curr.setEndsWord(true);
+//		    		size++;					
+//		    	}
+//		    	curr.setEndsWord(false);
+//		    }
+//		    curr = curr.getChild(c);		    		    	
+//		    //Process char
+//		}
+//		printTree();
+//	    return curr.endsWord();
+//	}
+    public boolean addWord(String word)	
+    {	    //TODO: Implement this method.		
+    	word=word.toLowerCase();		
+    	TrieNode a=root;		
+    	for(int i=0;i<word.length();i++)	
+    	{			
+    		TrieNode b;			
+    		b=a.getChild(word.charAt(i));
+    		if(b==null)		
+    			a=a.insert(word.charAt(i));	
+    		if(i==word.length()-1)
+    		{
+    			a.setEndsWord(true);
+    			return true;	
+    		}	
+    	}
+    	printTree();
+    	return false;
+    }	
+    
 	/** 
 	 * Return the number of words in the dictionary.  This is NOT necessarily the same
 	 * as the number of TrieNodes in the trie.
@@ -106,9 +124,23 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 		}
 		                 return curr.endsWord();	
 		                 
-		             	//public boolean isWord(String s) 	{			    // TODO: Implement this method		s = s.toLowerCase();		TrieNode curr = root;	    //TODO: Implement this method.		for (int i = 0; i<s.length(); i++) {				curr = curr.getChild(s.charAt(i));			}		return curr.endsWord();	}		                 
+				                 
 	}
-
+	/** Returns whether the string is a word in the trie, using the algorithm
+	 * described in the videos for this week. */
+//	@Override	
+//	public boolean isWord(String s) 	
+//	{			    
+//		s = s.toLowerCase();
+//		TrieNode curr = root;
+//		//TODO: Implement this method.
+//		for (int i = 0; i< s.length(); i++) 
+//		{				
+//			curr = curr.getChild(s.charAt(i));
+//		}		
+//			return curr.endsWord();	
+//	}
+	
 	/** 
      * Return a list, in order of increasing (non-decreasing) word length,
      * containing the numCompletions shortest legal completions 
