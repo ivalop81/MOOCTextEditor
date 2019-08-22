@@ -85,16 +85,28 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 	    // TODO: Implement this method
 		TrieNode curr = root;
 		Character c;
+		String tmp = "";
+		
+		if (s.isEmpty() || s == null) {
+			return false;
+		}
+		
 		for (int i = 0; i < s.length(); i++)
 		{
 			c = s.toLowerCase().charAt(i);
-			//if(c.equals(curr.getText().charAt(i)))
+			tmp.concat(c.toString());
+			if(curr.getText().contentEquals(tmp))
+			{
 				curr = curr.getChild(c);
+				//if (curr.endsWord())
+					//return true;
+			}
 //			else
 //				return false;
 		}
-		curr.setEndsWord(true);		
-		return false;
+		                 return curr.endsWord();	
+		                 
+		             	//public boolean isWord(String s) 	{			    // TODO: Implement this method		s = s.toLowerCase();		TrieNode curr = root;	    //TODO: Implement this method.		for (int i = 0; i<s.length(); i++) {				curr = curr.getChild(s.charAt(i));			}		return curr.endsWord();	}		                 
 	}
 
 	/** 
