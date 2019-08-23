@@ -39,50 +39,49 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 	 * @return true if the word was successfully added or false if it already exists
 	 * in the dictionary.
 	 */
-//	public boolean addWord(String word)
-//	{
-//	    //TODO: Implement this method.		
-//		char c;
-//		TrieNode curr = root;
-//		for (int i = 0; i < word.length(); i++)
-//		{
-//		    c = word.toLowerCase().charAt(i);
-//		    		
-//		    if (curr.getChild(c) == null) 
-//		    {
-//		    	curr.insert(c);		    	
-//		    	if (i == word.length()-1) 
-//		    	{
-//		    		curr.setEndsWord(true);
-//		    		size++;					
-//		    	}
-//		    	curr.setEndsWord(false);
-//		    }
-//		    curr = curr.getChild(c);		    		    	
-//		    //Process char
-//		}
-//		printTree();
-//	    return curr.endsWord();
-//	}
-    public boolean addWord(String word)	
-    {	    //TODO: Implement this method.		
-    	word=word.toLowerCase();		
-    	TrieNode a=root;		
-    	for(int i=0;i<word.length();i++)	
-    	{			
-    		TrieNode b;			
-    		b=a.getChild(word.charAt(i));
-    		if(b==null)		
-    			a=a.insert(word.charAt(i));	
-    		if(i==word.length()-1)
-    		{
-    			a.setEndsWord(true);
-    			return true;	
-    		}	
-    	}
-    	printTree();
-    	return false;
-    }	
+	public boolean addWord(String word)
+	{
+	    //TODO: Implement this method.		
+		char c;
+		TrieNode curr = root;
+		for (int i = 0; i < word.length(); i++)
+		{
+		    c = word.toLowerCase().charAt(i);
+		    		
+		    if (curr.insert(c) != null) 
+		    {	    			    	
+		    	if (i == word.length()-1) 
+		    	{
+		    		curr.setEndsWord(true);
+		    		size++;					
+		    	}
+		    	curr.setEndsWord(false);
+		    }
+		    curr = curr.getChild(c);		    		    	
+		    //Process char
+		}
+		printTree();
+	    return curr.endsWord();
+	}
+//    public boolean addWord(String word)	
+//    {	    //TODO: Implement this method.		
+//    	word=word.toLowerCase();		
+//    	TrieNode a=root;		
+//    	for(int i=0;i<word.length();i++)	
+//    	{			
+//    		TrieNode b;			
+//    		b=a.getChild(word.charAt(i));
+//    		if(b==null)		
+//    			a=a.insert(word.charAt(i));	
+//    		if(i==word.length()-1)
+//    		{
+//    			a.setEndsWord(true);
+//    			return true;	
+//    		}	
+//    	}
+//    	printTree();
+//    	return false;
+//    }	
     
 	/** 
 	 * Return the number of words in the dictionary.  This is NOT necessarily the same

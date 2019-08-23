@@ -34,11 +34,11 @@ public class AutoCompleteDictionaryTrieTester {
 		largeDict = new AutoCompleteDictionaryTrie();
 
 		smallDict.addWord("Hello");
-		smallDict.addWord("HElLo");
+//		smallDict.addWord("HElLo");
 //		smallDict.addWord("HElLO)");
 //		smallDict.addWord("HELLO)");
-		smallDict.addWord("help");
-		smallDict.addWord("he");
+//		smallDict.addWord("help");
+//		smallDict.addWord("he");
 //		smallDict.addWord("hem");
 //		smallDict.addWord("hot");
 //		smallDict.addWord("hey");
