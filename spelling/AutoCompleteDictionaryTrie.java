@@ -47,41 +47,26 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 		for (int i = 0; i < word.length(); i++)
 		{
 		    c = word.toLowerCase().charAt(i);
-		    		
-		    if (curr.insert(c) != null) 
-		    {	    			    	
-		    	if (i == word.length()-1) 
-		    	{
-		    		curr.setEndsWord(true);
-		    		size++;					
+		    TrieNode next = curr.getChild(c);
+		    if (next == null) 
+		    {
+		    	//if(curr.insert(c)!=null) 
+		    	//{		    	
+		    	next = curr.insert(c);
+		    	if(i == word.length()-1) {
+		    		next.setEndsWord(true);
+		    		size++;
 		    	}
-		    	curr.setEndsWord(false);
+		    	//}		    	
 		    }
-		    curr = curr.getChild(c);		    		    	
+		    curr = next;
 		    //Process char
 		}
-		printTree();
+			
+		//printTree();
 	    return curr.endsWord();
 	}
-//    public boolean addWord(String word)	
-//    {	    //TODO: Implement this method.		
-//    	word=word.toLowerCase();		
-//    	TrieNode a=root;		
-//    	for(int i=0;i<word.length();i++)	
-//    	{			
-//    		TrieNode b;			
-//    		b=a.getChild(word.charAt(i));
-//    		if(b==null)		
-//    			a=a.insert(word.charAt(i));	
-//    		if(i==word.length()-1)
-//    		{
-//    			a.setEndsWord(true);
-//    			return true;	
-//    		}	
-//    	}
-//    	printTree();
-//    	return false;
-//    }	
+
     
 	/** 
 	 * Return the number of words in the dictionary.  This is NOT necessarily the same
@@ -102,7 +87,7 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 	    // TODO: Implement this method
 		TrieNode curr = root;
 		Character c;
-		String tmp = "";
+		//String tmp = "";
 		
 		if (s.isEmpty() || s == null) {
 			return false;
@@ -111,19 +96,17 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 		for (int i = 0; i < s.length(); i++)
 		{
 			c = s.toLowerCase().charAt(i);
-			tmp.concat(c.toString());
-			if(curr.getText().contentEquals(tmp))
+			TrieNode next = curr.getChild(c);
+			if(next!=null)
 			{
-				curr = curr.getChild(c);
-				//if (curr.endsWord())
-					//return true;
+				curr = next;
 			}
-//			else
-//				return false;
+			else
+				return false;
+			
 		}
-		                 return curr.endsWord();	
-		                 
-				                 
+	    return curr.endsWord();	
+		                 				               
 	}
 	/** Returns whether the string is a word in the trie, using the algorithm
 	 * described in the videos for this week. */
@@ -191,6 +174,7 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
  	/** Do a pre-order traversal from this node down */
  	public void printNode(TrieNode curr)
  	{
+ 		
  		if (curr == null) 
  			return;
  		

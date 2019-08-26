@@ -80,6 +80,8 @@ class TrieNode {
 	/** Return the set of characters that have links from this node */
 	public Set<Character> getValidNextCharacters()
 	{
+		
+		//System.out.print(children.keySet());
 		return children.keySet();
 	}
 
