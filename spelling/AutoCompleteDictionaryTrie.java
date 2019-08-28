@@ -3,9 +3,11 @@ package spelling;
 import java.util.List;
 
 import java.util.Set;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Queue;
 
 /** 
  * An trie data structure that implements the Dictionary and the AutoComplete ADT
@@ -49,18 +51,15 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 		    c = word.toLowerCase().charAt(i);
 		    TrieNode next = curr.getChild(c);
 		    if (next == null) 
-		    {
-		    	//if(curr.insert(c)!=null) 
-		    	//{		    	
+		    {    	
 		    	next = curr.insert(c);
-		    	if(i == word.length()-1) {
+		    	if(i == word.length()-1)
+		    	{
 		    		next.setEndsWord(true);
 		    		size++;
-		    	}
-		    	//}		    	
+		    	}		    	
 		    }
 		    curr = next;
-		    //Process char
 		}
 			
 		//printTree();
@@ -87,7 +86,6 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 	    // TODO: Implement this method
 		TrieNode curr = root;
 		Character c;
-		//String tmp = "";
 		
 		if (s.isEmpty() || s == null) {
 			return false;
@@ -108,20 +106,6 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 	    return curr.endsWord();	
 		                 				               
 	}
-	/** Returns whether the string is a word in the trie, using the algorithm
-	 * described in the videos for this week. */
-//	@Override	
-//	public boolean isWord(String s) 	
-//	{			    
-//		s = s.toLowerCase();
-//		TrieNode curr = root;
-//		//TODO: Implement this method.
-//		for (int i = 0; i< s.length(); i++) 
-//		{				
-//			curr = curr.getChild(s.charAt(i));
-//		}		
-//			return curr.endsWord();	
-//	}
 	
 	/** 
      * Return a list, in order of increasing (non-decreasing) word length,
@@ -146,7 +130,7 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
      */@Override
      public List<String> predictCompletions(String prefix, int numCompletions) 
      {
-    	 //ArrayList<String> suggestedWords = new ArrayList(); 
+    	 List<String> suggestedWords = new ArrayList<String>(); 
     	 // TODO: Implement this method
     	 // This method should implement the following algorithm:
     	 // 1. Find the stem in the trie.  If the stem does not appear in the trie, return an
@@ -161,6 +145,32 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
     	 //       If it is a word, add it to the completions list
     	 //       Add all of its child nodes to the back of the queue
     	 // Return the list of completions
+    	 Character c;
+    	 TrieNode curr = root;
+    	 for (int i=0; i < prefix.length(); i++)
+    	 {
+    		 c = prefix.toLowerCase().charAt(i);
+    		 TrieNode next = curr.getChild(c);
+    		 if (next!=null)
+    		 {
+    			 if(!curr.endsWord())
+    			 {
+    				  // Search "numCompletions" final words with a DFS
+    				  for (int j = 0; j < numCompletions; j++)
+    				  {    			 
+    					  
+    				  }
+    				  curr = next;
+    				  
+    			 }
+    		 }
+    		 else
+    		 {   // TODO how to return an empty list
+    			 suggestedWords.clear();
+    			 suggestedWords.add("");
+    			 return suggestedWords;    					 
+    		 }
+    	 }
     	 
          return null;
      }
@@ -187,6 +197,19 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
  		}
  	}
  	
+	public List<String> levelOrder(TrieNode next) 
+	{
+		Queue <TrieNode>  q = new LinkedList< TrieNode >();
+		q.add(root);
+		
+		while(!q.isEmpty()) {
+			TrieNode curr = q.remove();
+			if(curr != null) {
+				suggested.add(curr.getText());
+				q.add(curr);						
+			}
+		}	
+	}  	
 
 	
 }
