@@ -6,6 +6,8 @@ import java.util.Random;
 public class LaunchClass {
 	
 	public String dictFile = "data/dict.txt";
+			//"data/words.small.txt"; 
+			//"data/single_word.txt"; 
 	
 	public LaunchClass() {
 		super();

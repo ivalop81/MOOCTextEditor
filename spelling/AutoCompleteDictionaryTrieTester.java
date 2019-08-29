@@ -16,9 +16,9 @@ import org.junit.Test;
  *
  */
 public class AutoCompleteDictionaryTrieTester {
-
+	
 	private String dictFile = "data/words.small.txt"; 
-
+		
 	AutoCompleteDictionaryTrie emptyDict; 
 	AutoCompleteDictionaryTrie smallDict;
 	AutoCompleteDictionaryTrie largeDict;
@@ -34,18 +34,18 @@ public class AutoCompleteDictionaryTrieTester {
 		largeDict = new AutoCompleteDictionaryTrie();
 
 		smallDict.addWord("Hello");
-		smallDict.addWord("HElLo");
-		smallDict.addWord("HElLO)");
-		smallDict.addWord("HELLO)");
-		smallDict.addWord("help");
-		smallDict.addWord("he");
-		smallDict.addWord("hem");
-		smallDict.addWord("hot");
-		smallDict.addWord("hey");
-		smallDict.addWord("a");
-		smallDict.addWord("subsequent");
+//		smallDict.addWord("HElLo");
+//		smallDict.addWord("HElLO)");
+//		smallDict.addWord("HELLO)");
+//		smallDict.addWord("help");
+//		smallDict.addWord("he");
+//		smallDict.addWord("hem");
+//		smallDict.addWord("hot");
+//		smallDict.addWord("hey");
+//		smallDict.addWord("a");
+//		smallDict.addWord("subsequent");
 //		
-		DictionaryLoader.loadDictionary(largeDict, dictFile);
+		//DictionaryLoader.loadDictionary(largeDict, dictFile);
 	}
 
 	
@@ -60,6 +60,7 @@ public class AutoCompleteDictionaryTrieTester {
 	}
 	
 	/** Test the isWord method */
+	
 	@Test
 	public void testIsWord()
 	{
@@ -90,8 +91,7 @@ public class AutoCompleteDictionaryTrieTester {
 	@Test
 	public void testAddWord()
 	{
-		
-		
+			
 		assertEquals("Asserting hellow is not in empty dict", false, emptyDict.isWord("hellow"));
 		assertEquals("Asserting hellow is not in small dict", false, smallDict.isWord("hellow"));
 		assertEquals("Asserting hellow is not in large dict", false, largeDict.isWord("hellow"));
@@ -161,8 +161,5 @@ public class AutoCompleteDictionaryTrieTester {
 		completions = smallDict.predictCompletions("x", 5);
 		assertEquals(0, completions.size());
 	}
-	
-	
-	
-	
+		
 }

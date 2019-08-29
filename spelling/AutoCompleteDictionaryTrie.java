@@ -19,9 +19,7 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
     private TrieNode root;
     private int size;
     
-
-    public AutoCompleteDictionaryTrie()
-	{
+    public AutoCompleteDictionaryTrie() {
 		root = new TrieNode();
 		size = 0;
 	}
@@ -46,19 +44,20 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 	    //TODO: Implement this method.		
 		char c;
 		TrieNode curr = root;
-		for (int i = 0; i < word.length(); i++)
-		{
+		
+		for (int i = 0; i < word.length(); i++) {
 		    c = word.toLowerCase().charAt(i);
 		    TrieNode next = curr.getChild(c);
-		    if (next == null) 
-		    {    	
+		    
+		    if (next == null) {    	
 		    	next = curr.insert(c);
-		    	if(i == word.length()-1)
-		    	{
+		    	
+		    	if(i == word.length()-1) {
 		    		next.setEndsWord(true);
 		    		size++;
 		    	}		    	
 		    }
+		    
 		    curr = next;
 		}
 			
@@ -81,8 +80,7 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 	/** Returns whether the string is a word in the trie, using the algorithm
 	 * described in the videos for this week. */
 	@Override
-	public boolean isWord(String s) 
-	{
+	public boolean isWord(String s) {
 	    // TODO: Implement this method
 		TrieNode curr = root;
 		Character c;
@@ -91,20 +89,17 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 			return false;
 		}
 		
-		for (int i = 0; i < s.length(); i++)
-		{
+		for (int i = 0; i < s.length(); i++) {			
 			c = s.toLowerCase().charAt(i);
 			TrieNode next = curr.getChild(c);
-			if(next!=null)
-			{
-				curr = next;
-			}
-			else
-				return false;
 			
+			if(next!=null) {
+				curr = next;
+			} else
+				return false;			
 		}
-	    return curr.endsWord();	
-		                 				               
+		
+	    return curr.endsWord();			                 				               
 	}
 	
 	/** 
@@ -128,9 +123,8 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
      * @param numCompletions The maximum number of predictions desired.
      * @return A list containing the up to numCompletions best predictions
      */@Override
-     public List<String> predictCompletions(String prefix, int numCompletions) 
-     {
-    	 List<String> suggestedWords = new ArrayList<String>(); 
+     public List<String> predictCompletions(String prefix, int numCompletions)  {
+    	 List<String> suggestedWords = null; 
     	 // TODO: Implement this method
     	 // This method should implement the following algorithm:
     	 // 1. Find the stem in the trie.  If the stem does not appear in the trie, return an
@@ -147,44 +141,28 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
     	 // Return the list of completions
     	 Character c;
     	 TrieNode curr = root;
-    	 for (int i=0; i < prefix.length(); i++)
-    	 {
+    	 //printTree();
+    	 for(int i = 0; i < prefix.length() && curr != null; i++) {    		 
     		 c = prefix.toLowerCase().charAt(i);
-    		 TrieNode next = curr.getChild(c);
-    		 if (next!=null)
-    		 {
-    			 if(!curr.endsWord())
-    			 {
-    				  // Search "numCompletions" final words with a DFS
-    				  for (int j = 0; j < numCompletions; j++)
-    				  {    			 
-    					  
-    				  }
-    				  curr = next;
-    				  
-    			 }
-    		 }
-    		 else
-    		 {   // TODO how to return an empty list
-    			 suggestedWords.clear();
-    			 suggestedWords.add("");
-    			 return suggestedWords;    					 
-    		 }
+    		 curr = curr.getChild(c);
     	 }
+    		 
+		 if (curr != null) {
+			 suggestedWords = levelOrder(curr, numCompletions);    			 
+		 } else {   // TODO how to return an empty list
+			 suggestedWords = new ArrayList<String>(); 			     					
+		 }
     	 
-         return null;
+         return suggestedWords;
      }
 
  	// For debugging
- 	public void printTree()
- 	{
+ 	public void printTree() {
  		printNode(root);
  	}
  	
  	/** Do a pre-order traversal from this node down */
- 	public void printNode(TrieNode curr)
- 	{
- 		
+ 	public void printNode(TrieNode curr) {
  		if (curr == null) 
  			return;
  		
@@ -197,19 +175,27 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
  		}
  	}
  	
-	public List<String> levelOrder(TrieNode next) 
-	{
-		Queue <TrieNode>  q = new LinkedList< TrieNode >();
-		q.add(root);
+	public List<String> levelOrder(TrieNode next, int numCompletions) {
+		List<String> suggWord = new ArrayList<String>();
 		
-		while(!q.isEmpty()) {
+		Queue <TrieNode>  q = new LinkedList< TrieNode >();
+		q.add(next);
+		
+		int wC = 0;
+		
+		while(!q.isEmpty() && wC < numCompletions) {
 			TrieNode curr = q.remove();
 			if(curr != null) {
-				suggested.add(curr.getText());
-				q.add(curr);						
+				if (curr.endsWord()) {
+					suggWord.add(curr.getText());
+					wC++;
+				}
+				for(Character c : curr.getValidNextCharacters()) {
+					q.add(curr.getChild(c));
+				}										
 			}
-		}	
-	}  	
-
-	
+		} 
+		System.out.print(suggWord);
+		return suggWord;
+	}  		
 }
