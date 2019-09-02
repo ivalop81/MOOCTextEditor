@@ -58,6 +58,11 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 		    	}		    	
 		    }
 		    
+	    	if(i == word.length()-1 && !next.endsWord()) {
+	    		next.setEndsWord(true);
+	    		size++;
+	    	}	
+		    	    
 		    curr = next;
 		}
 			
@@ -171,7 +176,7 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
  		TrieNode next = null;
  		for (Character c : curr.getValidNextCharacters()) {
  			next = curr.getChild(c);
- 			printNode(next);
+ 			//printNode(next);
  		}
  	}
  	

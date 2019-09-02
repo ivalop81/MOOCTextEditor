@@ -34,18 +34,18 @@ public class AutoCompleteDictionaryTrieTester {
 		largeDict = new AutoCompleteDictionaryTrie();
 
 		smallDict.addWord("Hello");
-//		smallDict.addWord("HElLo");
-//		smallDict.addWord("HElLO)");
-//		smallDict.addWord("HELLO)");
-//		smallDict.addWord("help");
-//		smallDict.addWord("he");
-//		smallDict.addWord("hem");
-//		smallDict.addWord("hot");
-//		smallDict.addWord("hey");
-//		smallDict.addWord("a");
-//		smallDict.addWord("subsequent");
-//		
-		//DictionaryLoader.loadDictionary(largeDict, dictFile);
+		smallDict.addWord("HElLo");
+		smallDict.addWord("HElLO)");
+		smallDict.addWord("HELLO)");
+		smallDict.addWord("help");
+		smallDict.addWord("he");
+		smallDict.addWord("hem");
+		smallDict.addWord("hot");
+		smallDict.addWord("hey");
+		smallDict.addWord("a");
+		smallDict.addWord("subsequent");
+		
+		DictionaryLoader.loadDictionary(largeDict, dictFile);
 	}
 
 	
@@ -154,7 +154,7 @@ public class AutoCompleteDictionaryTrieTester {
 		assertTrue(allIn);
 		
 		completions = smallDict.predictCompletions("hel", 10);
-		assertEquals(2, completions.size());
+		assertEquals(3, completions.size());
 		allIn = completions.contains("hello") && completions.contains("help");
 		assertTrue(allIn);
 	
