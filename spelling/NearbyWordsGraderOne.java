@@ -37,43 +37,45 @@ public class NearbyWordsGraderOne {
 //            d1 = nw.distanceOne("word", false);
 //            feedback += "distanceOne with non-words returned " + d1.size() + " words.\n";
 //            
-//            d1 = new ArrayList<String>();
-//            
-//            feedback += "** Test 4: deletions list size... ";
-//            nw.deletions("makers", d1, true);
-//            feedback += "deletions returned " + d1.size() + " words.\n";
-//
-//            feedback += "** Test 5: deletions words returned... ";
-//            feedback += "deletions returned: ";
-//            for (String i : d1) {
-//                feedback += i + ", ";
-//            }
-//
             d1 = new ArrayList<String>();
+            
+            feedback += "** Test 4: deletions list size... ";
+            nw.deletions("makers", d1, true);
+            feedback += "deletions returned " + d1.size() + " words.\n";
 
-            feedback += "\n** Test 6: insertions list size... ";
-            nw.insertions("or", d1, true);
-            feedback += "insertions returned " + d1.size() + " words.\n";
-
-            feedback += "** Test 7: insertions words returned... ";
-            feedback += "insertions returned: ";
+            feedback += "** Test 5: deletions words returned... ";
+            feedback += "deletions returned: ";
             for (String i : d1) {
                 feedback += i + ", ";
             }
             feedback += "\n";
+            
+//
+//            d1 = new ArrayList<String>();
+//
+//            feedback += "\n** Test 6: insertions list size... ";
+//            nw.insertions("or", d1, false);
+//            feedback += "insertions returned " + d1.size() + " words.\n";
+//
+//            feedback += "** Test 7: insertions words returned... ";
+//            feedback += "insertions returned: ";
+//            for (String i : d1) {
+//                feedback += i + ", ";
+//            }
+//            feedback += "\n";
 
-          d1 = new ArrayList<String>();
+          //
 
-          feedback += "\n** Test 8: substitution list size... ";
-          nw.substitution("or", d1, false);
-          feedback += "substitution returned " + d1.size() + " words.\n";
-
-          feedback += "** Test 9: substitution words returned... ";
-          feedback += "substitution returned: ";
-          for (String i : d1) {
-              feedback += i + ", ";
-          }
-          feedback += "\n";
+//          feedback += "\n** Test 8: substitution list size... ";
+//          nw.substitution("or", d1, false);
+//          feedback += "substitution returned " + d1.size() + " words.\n";
+//
+//          feedback += "** Test 9: substitution words returned... ";
+//          feedback += "substitution returned: ";
+//          for (String i : d1) {
+//              feedback += i + ", ";
+//          }
+//          feedback += "\n";
             
             
         } catch (Exception e) {
