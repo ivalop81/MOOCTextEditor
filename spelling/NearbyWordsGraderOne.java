@@ -23,32 +23,32 @@ public class NearbyWordsGraderOne {
             DictionaryLoader.loadDictionary(d, "test_cases/dict.txt");
             NearbyWords nw = new NearbyWords(d);
 
-            List<String> d1 ;//= nw.distanceOne("word", true);
-//            
-//            feedback += "** Test 1: distanceOne list size... ";
-//            feedback += "distanceOne returned " + d1.size() + " words.\n";
-//
-//            feedback += "** Test 2: distanceOne words returned... ";
-//            for (String i : d1) {
-//                feedback += i + ", ";
-//            }
-//
-//            feedback += "\n** Test 3: distanceOne list size (allowing non-words)... ";
-//            d1 = nw.distanceOne("word", false);
-//            feedback += "distanceOne with non-words returned " + d1.size() + " words.\n";
-//            
-            d1 = new ArrayList<String>();
+            List<String> d1 = nw.distanceOne("word", true);
             
-            feedback += "** Test 4: deletions list size... ";
-            nw.deletions("makers", d1, true);
-            feedback += "deletions returned " + d1.size() + " words.\n";
+            feedback += "** Test 1: distanceOne list size... ";
+            feedback += "distanceOne returned " + d1.size() + " words.\n";
 
-            feedback += "** Test 5: deletions words returned... ";
-            feedback += "deletions returned: ";
+            feedback += "** Test 2: distanceOne words returned... ";
             for (String i : d1) {
                 feedback += i + ", ";
             }
-            feedback += "\n";
+
+            feedback += "\n** Test 3: distanceOne list size (allowing non-words)... ";
+            d1 = nw.distanceOne("word", false);
+            feedback += "distanceOne with non-words returned " + d1.size() + " words.\n";
+            
+//            d1 = new ArrayList<String>();
+//            
+//            feedback += "** Test 4: deletions list size... ";
+//            nw.deletions("makers", d1, false);
+//            feedback += "deletions returned " + d1.size() + " words.\n";
+//
+//            feedback += "** Test 5: deletions words returned... ";
+//            feedback += "deletions returned: ";
+//            for (String i : d1) {
+//                feedback += i + ", ";
+//            }
+//            feedback += "\n";
             
 //
 //            d1 = new ArrayList<String>();
