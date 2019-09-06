@@ -23,7 +23,7 @@ public class NearbyWordsGraderOne {
             DictionaryLoader.loadDictionary(d, "test_cases/dict.txt");
             NearbyWords nw = new NearbyWords(d);
 
-            List<String> d1 = nw.distanceOne("word", true);
+            List<String> d1 = nw.distanceOne("or", true);
             
             feedback += "** Test 1: distanceOne list size... ";
             feedback += "distanceOne returned " + d1.size() + " words.\n";
@@ -34,40 +34,43 @@ public class NearbyWordsGraderOne {
             }
 
             feedback += "\n** Test 3: distanceOne list size (allowing non-words)... ";
-            d1 = nw.distanceOne("word", false);
+            d1 = nw.distanceOne("or", false);
             feedback += "distanceOne with non-words returned " + d1.size() + " words.\n";
-            
-//            d1 = new ArrayList<String>();
+          feedback += "** Test 3: distanceOne words returned... ";
+          for (String i : d1) {
+              feedback += i + ", ";
+          }
+            d1 = new ArrayList<String>();
 //            
-//            feedback += "** Test 4: deletions list size... ";
-//            nw.deletions("makers", d1, false);
-//            feedback += "deletions returned " + d1.size() + " words.\n";
-//
-//            feedback += "** Test 5: deletions words returned... ";
-//            feedback += "deletions returned: ";
-//            for (String i : d1) {
-//                feedback += i + ", ";
-//            }
-//            feedback += "\n";
+            feedback += "** Test 4: deletions list size... ";
+            nw.deletions("makers", d1, true);
+            feedback += "deletions returned " + d1.size() + " words.\n";
+
+            feedback += "** Test 5: deletions words returned... ";
+            feedback += "deletions returned: ";
+            for (String i : d1) {
+                feedback += i + ", ";
+            }
+            feedback += "\n";
             
-//
-//            d1 = new ArrayList<String>();
-//
-//            feedback += "\n** Test 6: insertions list size... ";
-//            nw.insertions("or", d1, false);
-//            feedback += "insertions returned " + d1.size() + " words.\n";
-//
-//            feedback += "** Test 7: insertions words returned... ";
-//            feedback += "insertions returned: ";
-//            for (String i : d1) {
-//                feedback += i + ", ";
-//            }
-//            feedback += "\n";
+
+            d1 = new ArrayList<String>();
+
+            feedback += "\n** Test 6: insertions list size... ";
+            nw.insertions("or", d1, true);
+            feedback += "insertions returned " + d1.size() + " words.\n";
+
+            feedback += "** Test 7: insertions words returned... ";
+            feedback += "insertions returned: ";
+            for (String i : d1) {
+                feedback += i + ", ";
+            }
+            feedback += "\n";
 
           //
 
 //          feedback += "\n** Test 8: substitution list size... ";
-//          nw.substitution("or", d1, false);
+//          nw.substitution("or", d1, true);
 //          feedback += "substitution returned " + d1.size() + " words.\n";
 //
 //          feedback += "** Test 9: substitution words returned... ";
