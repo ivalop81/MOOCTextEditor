@@ -7,6 +7,7 @@ package spelling;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * WPTree implements WordPath by dynamically creating a tree of words during a Breadth First
@@ -27,9 +28,9 @@ public class WPTree implements WordPath {
 	public WPTree () {
 		this.root = null;
 		// TODO initialize a NearbyWords object
-		// Dictionary d = new DictionaryHashSet();
-		// DictionaryLoader.loadDictionary(d, "data/dict.txt");
-		// this.nw = new NearbyWords(d);
+		 Dictionary d = new DictionaryHashSet();
+		 DictionaryLoader.loadDictionary(d, "data/dict.txt");
+		 this.nw = new NearbyWords(d);
 	}
 	
 	//This constructor will be used by the grader code
@@ -42,7 +43,47 @@ public class WPTree implements WordPath {
 	public List<String> findPath(String word1, String word2) 
 	{
 	    // TODO: Implement this method.
-	    return new LinkedList<String>();
+		// Create a queue of WPTreeNodes to hold words to explore
+		Queue<WPTreeNode> queue = new LinkedList<WPTreeNode>(); 
+		// Create a visited set to avoid looking at the same word repeatedly
+		HashSet<String> visited = new HashSet<String>();
+		// Set the root to be a WPTreeNode containing word1
+		this.root = new WPTreeNode(word1, null);
+		
+		List<String> neighbors = new LinkedList<String>();
+		
+		// root.
+		// Add the initial word to visited
+		visited.add(word1);
+		// Add root to the queue
+		queue.add(root);
+		
+		//while the queue has elements and we have not yet found word2
+		while(!queue.isEmpty() && !visited.contains(word2)) {
+			// remove the node from the start of the queue and assign to curr
+			WPTreeNode curr = queue.remove();
+			// get a list of real word neighbors (one mutation from curr's word)
+			neighbors = this.nw.distanceOne(curr.getWord(), true);
+			//  for each n in the list of neighbors
+			for (String neighbor : neighbors) {
+				// if n is not visited
+				if (!visited.contains(neighbor)) {
+					// add n as a child of curr
+					curr.addChild(neighbor);
+					// add n to the visited set
+					visited.add(neighbor);
+					// add the node for n to the back of the queue
+					queue.add(curr);
+					// if n is word2
+					if (neighbor.contentEquals(word2)) {
+						// return the path from child to root
+						return curr.buildPathToRoot();
+					}
+				}
+			}
+		}
+	    // return null as no path exists
+		return null;
 	}
 	
 	// Method to print a list of WPTreeNodes (useful for debugging)

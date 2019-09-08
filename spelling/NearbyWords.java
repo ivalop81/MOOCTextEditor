@@ -200,7 +200,7 @@ public class NearbyWords implements SpellingSuggest {
 	   System.out.println(l+"\n");
 
 	   word = "tailo";
-	   List<String> suggest = w.suggestions(word, 10);
+	   List<String> suggest = w.suggestions(word, 4);
 	   System.out.println("Spelling Suggestions for \""+word+"\" are:");
 	   System.out.println(suggest);
 	   //
